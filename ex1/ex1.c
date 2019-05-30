@@ -92,9 +92,15 @@ int main(void)
     return 0;
 }
 
+
+
+// Remember!
+// gcc -o ex1 ex1.c
+// ./ex1
+
 // int main(void)
 // {
-//     pid_t pid = fork();
+//     int pid = fork();
 
 //     if (pid == 0) {
 //         printf("Child!\n");
