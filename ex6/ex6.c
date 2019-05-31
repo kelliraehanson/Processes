@@ -14,13 +14,44 @@ and `clock_gettime()` should work just fine.
 #include <stdio.h>
 #include <unistd.h>
 #include <time.h>
+// C requires importing system / header files
+// This is when you import functionalities from other libraries. 
+//These could contain functions that you would like to use in  your program so you have to import them. 
+//You typically include these at the top of your C file. 
+//These could be header files from the standard library or header files that you write.
 
 #define number_iter 1000000
 #define BILLION 1000000000L
 
+
+// Remember!
+// gcc -o ex6 ex6.c
+// ./ex6
+// open another terminal window and ps al for a process list command
+// S+ ./ex6 means is in some form of sleep because it is wainting for keyboard input.
 int main()
 {
     // Your code here
+    struct timespec start, end;
+    int sum = 0;
+    int difference = 0;
+    int average = 0;
+
+    for (int i = 0; i < number_iter; i++) {
+        
+        clock_gettime(CLOCK_MONOTONIC, &start);
+
+        write(fileno(stdout), NULL, 0);
+
+        clock_gettime(CLOCK_MONOTONIC, &end);
+
+        difference = BILLION * (end.tv_sec - start.tv_sec);
+        sum += difference;
+    }
+
+    average = sum / number_iter;
+
+    printf("Average: %d ", average);
     
     return 0;
 }
